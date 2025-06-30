@@ -26,6 +26,6 @@ export class AuthService {
   }
 
   CreateUser(userName: string, userEmail: string, password: string): Observable<any> {
-    return this._http.post(`${environment.apiUrl}createUser`, { userEmail, password });
+    return this._http.post(`${environment.apiUrl}createUser`, { userName, userEmail, password });
   }
 }
