@@ -1,0 +1,65 @@
+<div class="h-90">
+  <form
+    class="flex flex-col gap-3 justify-center items-center h-full"
+    [formGroup]="form"
+  >
+    <mat-form-field class="w-80" appearance="outline">
+      <mat-icon matPrefix>alternate_email</mat-icon>
+      <input
+        matInput
+        placeholder="Your_Username"
+        formControlName="username"
+        [errorStateMatcher]="matcher"
+      />
+      @if(usernameFormControl.hasError('required')) {
+      <mat-error>Username é <strong>obrigatório.</strong></mat-error>
+      }
+      @if (usernameFormControl.hasError('minlength')) {
+        <mat-error>Username deve ter ao menos 4 caracteres.</mat-error>
+      }
+      @if (usernameFormControl.hasError('maxlength')) {
+        <mat-error>Username deve ter no maximo 20 caracteres.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="w-80" appearance="outline">
+      <mat-icon matPrefix>email</mat-icon>
+      <input
+        matInput
+        type="email"
+        placeholder="example@gmail.com"
+        formControlName="email"
+        [errorStateMatcher]="matcher"
+      />
+      @if (emailFormControl.hasError('required')) {
+        <mat-error>Email é <strong>obrigatório.</strong></mat-error>
+      }
+      @if (emailFormControl.hasError('email')) {
+        <mat-error>Por favor insira um email valido.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="w-80" appearance="outline">
+      <input
+        matInput
+        [type]="hide() ? 'password' : 'text'"
+        placeholder="******"
+        formControlName="password"
+        [errorStateMatcher]="matcher"
+      />
+      <button matSuffix class="w-10" (click)="clickEvent($event)">
+        <mat-icon> {{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      @if (passwordFormControl.hasError('required')) {
+        <mat-error>Senha é <strong>obrigatória.</strong></mat-error>
+      }
+      @if (passwordFormControl.hasError('minlength')) {
+        <mat-error>Senha deve ter ao menos 6 caracteres.</mat-error>
+      }
+      @if (passwordFormControl.hasError('maxlength')) {
+        <mat-error>Senha deve ter no maximo 20 caracteres.</mat-error>
+      }
+    </mat-form-field>
+    <div>
+      <button matFab extended class="w-60!" type="submit" (click)="cadastro($event)">Cadastrar-se</button>
+    </div>
+  </form>
+</div>
