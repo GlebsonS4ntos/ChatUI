@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
 import { Auth } from './auth/auth';
 import { App } from './app';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard, GuestGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   {
     path: 'auth',
-    component: Auth
+    component: Auth,
+    canActivate: [GuestGuard]
   },
   {
     path: 'chat',
@@ -15,8 +16,11 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'chat',
+    redirectTo: '/chat',
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '/chat'
   }
 ];
-
